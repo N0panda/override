@@ -1,5 +1,5 @@
 
-static char			a_user_name[0x100];
+static char			a_user_name[0x100]; // 0x804a040
 
 static int			verify_user_name(void)
 {
@@ -14,9 +14,10 @@ static int			verify_user_pass(char *buffer)
 
 int					main(void)
 {
-	char			buffer[0x64];
+	// sub 0x60
+	char			buffer[0x44]; // 0xffffd69c 0x1c, 68
 
-	memset(buffer, 0, 0x64);
+	memset(buffer, 0, 0x40);
 	puts("********* ADMIN LOGIN PROMPT *********");
 	printf("Enter Username: ");
 	fgets(stdin, 0x100, a_user_name);
@@ -32,5 +33,4 @@ int					main(void)
 		puts("nope, incorrect password...\n");
 		return (1);
 	}
-	system("/bin/sh");
 }
