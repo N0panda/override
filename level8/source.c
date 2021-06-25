@@ -7,7 +7,7 @@ void        log_wrapper(FILE *log_fd, char *string, char *file_name)
     int len;
 
     strcpy(buffer, string);
-    snprintf(&buffer[strlen(buffer)], 236, file_name);
+    snprintf(buffer + strlen(buffer), 236, file_name);
     len = strcspn("Starting back up: /tmp/tata", "\n");
     fprintf(log_fd, "LOG: %s\n", file_name);
     return;
@@ -15,6 +15,7 @@ void        log_wrapper(FILE *log_fd, char *string, char *file_name)
 
 int         main(int argc, char **argv)
 {
+	char	c;
     FILE    *log_fd;
     FILE    *file_fd
     char    *prefix;
@@ -49,8 +50,8 @@ int         main(int argc, char **argv)
         exit(1);
     }
 
-    while ((al = fgetc(file_fd)) != 0xff)
-        write(fd, al, 1);
+    while ((c = fgetc(file_fd)) != 0x0)
+        write(fd, &c, 1);
     
     log_wrapper(log_fd, "Finished back up ", argv[1]);
 

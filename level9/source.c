@@ -27,7 +27,7 @@ static void				set_username(struct *data)
 	printf(">>: ");
 	fgets(stdin, 0x80, name);
 	index = 0; // movl   $0x0,-0x4(%rbp)
-	while (index < 0x28 /* 40 */ && name[index])
+	while (index <= 0x28 /* 40 */ && name[index])
 	{
 		data->username[index] = name[index]; // movzbl -0x90(%rbp,%rax,1),%ecx
 		++index;
