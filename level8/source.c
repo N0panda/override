@@ -7,8 +7,8 @@ void        log_wrapper(FILE *log_fd, char *string, char *file_name)
     int len;
 
     strcpy(buffer, string);
-    snprintf(buffer + strlen(buffer), 236, file_name);
-    len = strcspn("Starting back up: /tmp/tata", "\n");
+    snprintf(&buffer[strlen(buffer)], 236, file_name);
+    buffer[strcspn(buffer, "\n")] = '\0';
     fprintf(log_fd, "LOG: %s\n", file_name);
     return;
 }

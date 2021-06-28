@@ -40,11 +40,11 @@ static void				set_msg(struct *data)
 	// sub 0x410
 	char				buffer[0x400]; // -0x400(%rbp) size:1024
 
-	memset(buffer, 0, 0x80 * 8); // 512(0x200)
+	memset(buffer, 0, 0x80 * 8); // sizeof(uint64) 
 	puts(">: Msg @Unix-Dude");
 	printf(">>: ");
 	fgets(stdin, buffer, 0x400);
-	strncpy(data->message, buffer, 0x400);
+	strncpy(data->message, buffer, data->message_length);
 }
 
 static void				handle_msg(void)
