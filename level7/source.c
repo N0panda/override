@@ -1,4 +1,27 @@
 
+void				clear_stdin(void)
+{
+	char			x;
+
+	x = 0;
+	while (42)
+	{
+		x = getchar();
+		if (x == '\n' || x == EOF)
+			break;
+	}
+}
+
+static int			get_unum(void)
+{
+	unsigned int	r;
+
+	fflush(stdout);
+	scanf("%u", &r);
+	clear_stdin();
+	return r;
+}
+
 static void			read_number(int *array/* -0xc(%ebp) */)
 {
 	// sub 0x28
@@ -34,7 +57,7 @@ static int			store_number(int *array)
 	sub    %eax,%edx
 	test   %edx,%edx  == %3
 **/ /* || */
-	if ((index >> 0x18) == 0xb7)
+	if (index % 3 && (index >> 0x18) == 0xb7)
 	{
 		puts(" *** ERROR! ***");
 		puts("   This index is reserved for wil!");
